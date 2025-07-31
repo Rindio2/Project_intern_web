@@ -1,9 +1,10 @@
 require('../config/database');
+require('dotenv').config(); // Đảm bảo dotenv được nạp để sử dụng biến môi trường
 const User = require('../models/User');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 
-const JWT_SECRET = 'your_secret_key'; // 🔐 nên lưu trong biến môi trường .env
+const JWT_SECRET = process.env.JWT_SECRET; // lưu trong biến môi trường .env
 
 const register = async (req, res) => {
   const { username, email, password } = req.body;
