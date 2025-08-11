@@ -1,17 +1,25 @@
 const express = require('express');
-const app = express();
+const cors = require('cors'); // ✅ Thêm dòng này
 const path = require('path');
+
+const app = express();
 
 // ✅ Kết nối MongoDB
 require('./src/config/database');
 
-// ✅ Import routes
-const userRoutes = require('./src/routes/user.routes');
-const authRoutes = require('./src/routes/auth.routes'); // 👈 Thêm dòng này
-const productRoutes = require('./src/routes/product.routes');
+// ✅ Cấu hình CORS – thêm sớm để áp dụng cho tất cả request
+app.use(cors({
+  origin: 'http://localhost:5173', // Đúng domain frontend React (Vite)
+  credentials: true // Nếu bạn dùng cookie hoặc cần gửi thông tin xác thực
+}));
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+
+// ✅ Import routes
+const userRoutes = require('./src/routes/user.routes');
+const authRoutes = require('./src/routes/auth.routes');
+const productRoutes = require('./src/routes/product.routes');
 
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
