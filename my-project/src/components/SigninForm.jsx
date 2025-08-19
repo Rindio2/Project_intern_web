@@ -21,7 +21,7 @@ const SigninForm = () => {
       localStorage.setItem("token", token);
       localStorage.setItem("user", JSON.stringify(user));
 
-      navigate("/");
+      navigate("/home-after-login");
     } catch (err) {
       alert(err.response?.data?.message || "Login failed");
     }

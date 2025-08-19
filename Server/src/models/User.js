@@ -22,9 +22,23 @@ const userSchema = new mongoose.Schema({
     type: String,
     enum: ['user', 'admin'],
     default: 'user'
+  },
+  avatar: {
+    type: String, // URL ảnh đại diện hoặc đường dẫn file
+    default: "https://i.pravatar.cc/150"
+  },
+  phone: {
+    type: String,
+    trim: true,
+    default: ""
+  },
+  address: {
+    type: String,
+    trim: true,
+    default: ""
   }
 }, {
-  timestamps: true // 👉 Thêm createdAt & updatedAt tự động
+  timestamps: true
 });
 
 module.exports = mongoose.model('User', userSchema);

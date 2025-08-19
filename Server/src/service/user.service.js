@@ -1,12 +1,20 @@
-require('../config/database'); // goi database
+// src/service/user.service.js
+require('../config/database');
 const User = require('../models/User');
 
-const findAll = async (req, res) => {
-  try {
-    const users = await User.find();
-    res.json(users);
-  } catch (err) {
-    res.status(500).json({ error: err.message });
-  }
+// ✅ Tìm tất cả user
+const findAll = async () => {
+  return await User.find();
 };
-module.exports = { findAll };
+
+// ✅ Tìm user theo id
+const findById = async (id) => {
+  return await User.findById(id);
+};
+
+// ✅ Update user theo id
+const updateById = async (id, updates) => {
+  return await User.findByIdAndUpdate(id, updates, { new: true });
+};
+
+module.exports = { findAll, findById, updateById };
